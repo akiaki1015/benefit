@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="{% static 'index.js' %}"></script>
+    <!-- Load c3.css -->
+    <link href="{% static 'c3/c3.min.css' %}" rel="stylesheet">
+
+    <!-- Load d3.js and c3.js -->
+    <script src="{% static 'c3/d3.v5.min.js' %}" charset="utf-8"></script>
+    <script src="{% static 'c3/c3.min.js' %}"></script>
+
+</head>
+<body>
+<div id="chart"></div>
+</body>
+<script type="text/javascript">
+    var chart = c3.generate({
+        bindto: '#chart',
+        data: {
+            x: 'x',
+            xFormat: '%Y-%m-%d %H:%M',
+            columns:
+                {% autoescape off %}
+                    {{ data }}
+                {% endautoescape off %}
+        },
+        legend: {
+            //position: 'inset',
+            inset: {
+                anchor: 'bottom-left',
+                    y: 100
+            }
+        },
+        axis: {
+            x: {
+                type: 'timeseries',
+                tick: {
+                    format: '%Y-%m-%d %H:%M'
+                }
+            }
+        },
+        subchart: {
+            show: true
+       },
+       grid: {
+            y: {
+                show: true
+            }
+       }
+    });
+
+</script>
+</html>
