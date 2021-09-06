@@ -8,13 +8,24 @@
     <!-- Load c3.css -->
     <link href="{% static 'c3/c3.min.css' %}" rel="stylesheet">
 
+    <!-- Load mermaid.css -->
+    <link href="{% static 'gridjs/mermaid.min.css' %}" rel="stylesheet">
+
     <!-- Load d3.js and c3.js -->
     <script src="{% static 'c3/d3.v5.min.js' %}" charset="utf-8"></script>
     <script src="{% static 'c3/c3.min.js' %}"></script>
 
+    <!-- Load gridjs.js -->
+    <script src="{% static 'gridjs/gridjs.umd.js' %}"></script>
+
 </head>
 <body>
 <div id="chart"></div>
+{% for product, values in eachProduct.items %}
+<p>{{ product }}</p>
+<div id="wrapper_{{ forloop.counter }}"></div>
+{% endfor %}
+<div id="wrapper"></div>
 </body>
 <script type="text/javascript">
     var chart = c3.generate({
@@ -51,6 +62,20 @@
             }
        }
     });
+
+
+    {% for product, values in eachProduct.items %}
+    new gridjs.Grid({
+        columns: ['日付', '損益率'],
+        sort: true,
+        resizable: true,
+        data: [
+            {% for date, rate in values.items reversed %}
+                ["{{date}}", "{{rate}}"],
+            {% endfor %}
+        ]
+    }).render(document.getElementById("wrapper_{{ forloop.counter }}"));
+    {% endfor %}
 
 </script>
 </html>

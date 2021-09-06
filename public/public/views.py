@@ -41,8 +41,21 @@ def index(request):
     for key, value in data_print.items():
         displayString += '["%s", %s],\n' % (key, ','.join(value))
 
+    # それぞれの商品履歴
+    eachProduct = {}
+    for row in rows:
+        if row[1] not in eachProduct:
+            eachProduct[row[1]] = {}
+        if row[0] not in eachProduct[row[1]]:
+            eachProduct[row[1]][row[0]] = row[2]
+
+
+    #print(eachProduct)
     #print(displayString)
 
     #context = {'data': "[" + ','.join(data_print) + "]"}
-    context = {'data': "[" + displayString.rstrip(',') + "]"}
+    context = {
+        'data': "[" + displayString.rstrip(',') + "]",
+        'eachProduct': eachProduct
+    }
     return HttpResponse(template.render(context, request))
