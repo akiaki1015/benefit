@@ -7,7 +7,7 @@ def index(request):
     template = loader.get_template('public/index.html')
     with connection.cursor() as cursor:
         cursor.execute(
-            "SELECT DATE_FORMAT(create_time, '%Y-%m-%d %H:%i') as date, product_name, pl_rate FROM History ORDER BY create_time")
+            "SELECT DATE_FORMAT(create_time, '%Y-%m-%d %H:%i') as date, product_name, pl_rate FROM History ORDER BY create_time DESC")
         rows = cursor.fetchall()
 
     # 日付

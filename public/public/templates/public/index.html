@@ -70,7 +70,7 @@
         sort: true,
         resizable: true,
         data: [
-            {% for date, rate in values.items reversed %}
+            {% for date, rate in values.items %}
                 ["{{date}}", "{{rate}}"],
             {% endfor %}
         ]
