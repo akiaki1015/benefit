@@ -3,6 +3,7 @@ import chromedriver_binary  # Adds chromedriver binary to path
 import re
 from DBClient import *
 from user_settings import BENEFIT
+import datetime
 
 # ---headON mode---------
 # driver = webdriver.Chrome()
@@ -40,6 +41,7 @@ profitAndLoss = driver.find_element_by_xpath(
 profitAndLossRatio = driver.find_element_by_xpath(
     "/html/body/form/div[1]/div[3]/div[2]/div[1]/div[2]/table/tbody/tr/td[2]/table/tbody/tr/td/table/tbody/tr/td[2]/table/tbody/tr/td").text
 
+print(datetime.datetime.today())
 print(profitAndLoss)
 print(profitAndLossRatio)
 

@@ -23,7 +23,7 @@ class DBClient:
         if self.session == "":
             Session = sessionmaker(bind=self.engine)
             self.session = Session()
-            print(self.session.query(History).all())
+            # print(self.session.query(History).all())
         return self.session
 
     def create_table(self):
